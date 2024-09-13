@@ -1,4 +1,3 @@
-
 export default class DoublyLinkedList {
   head = null;
   tail = null;
@@ -75,12 +74,13 @@ export default class DoublyLinkedList {
 }
 
 class Node {
-    data;
-    next;
+  data;
+  next;
+  prev;
 
-    constructor(data) {
-        this.data = data;
-        this.next = null;
-    }
-
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+    this.prev = null;
+  }
 }
