@@ -27,7 +27,7 @@ export default class DoublyLinkedList {
   indexOf(data) {}
 
   // - `insertAfter( index, data )` - indsætter et nyt element efter plads nummer *index*
-  inserAfter(index, data) {}
+  insertAfter(index, data) {}
 
   // - `insertBefore( index, data )` - indsætter et nyt element før plads nummer *index*
   insertBefore(index, data) {}
