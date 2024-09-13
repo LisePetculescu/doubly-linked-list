@@ -20,13 +20,14 @@ function createNodes() {
   node2.prev = node1;
   node4.prev = node2;
   const list = new DoublyLinkedList();
-  list.addFirst(node2);
-  list.addFirst(node1);
-  list.addLast(node4);
-
-  //   list.tail = node4;
-  //   console.log("node 1: ", node1);
-  //   console.log("list: ", list);
+  list.addNodeFirst(node2);
+  list.addNodeFirst(node1);
+  list.addNodeLast(node4);
+  const list2 = new DoublyLinkedList();
+  list2.addFirst("a");
+  list2.addFirst("c");
+  list2.addLast("r");
 
   window.list = list;
+  window.list2 = list2;
 }

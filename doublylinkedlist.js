@@ -54,23 +54,24 @@ export default class DoublyLinkedList {
 
   // - `addNodeLast( newNode )` - tilføjer en ny node til slutningen af listen
   addNodeLast(newNode) {
-    const prevTail = this.tail;
-    this.tail = newNode;
-
-    if (prevTail) {
-      this.tail.prev = prevTail;
-      prevTail.next = this.tail;
+    if (!this.tail) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      newNode.prev = this.tail;
+      this.tail = newNode;
     }
   }
 
   // - `addNodeFirst( newNode )` - tilføjer en ny node i starten af listen
   addNodeFirst(newNode) {
-    const prevHead = this.head;
-    this.head = newNode;
-
-    if (prevHead) {
-      this.head.next = prevHead;
-      prevHead.prev = this.head;
+    if (!this.head) {
+      this.head = this.tail = newNode;
+    } else {
+      this.head.prev = newNode;
+      newNode.next = this.head;
+      this.head = newNode;
     }
   }
 
@@ -109,7 +110,7 @@ export default class DoublyLinkedList {
       console.log(`
                 Node: ${current.data}
                 ---------------------
-                prev: ${current.previous?.data}
+                prev: ${current.prev?.data}
                 next: ${current.next?.data}
                 `);
       current = current.next;
