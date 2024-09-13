@@ -2,12 +2,23 @@ export default class DoublyLinkedList {
   head = null;
   tail = null;
 
+  // constructor(node) {
+  //   this.head = node;
+  //   this.tail = node;
+  // }
+
   // ******************** metoder til data ***********************
   // - `addLast( data )` - tilføjer et element til slutningen af listen
-  addLast(data) {}
+  addLast(data) {
+    const node = new Node(data);
+    this.addNodeLast(node);
+  }
 
   // - `addFirst( data )` - tilføjer et element til begyndelsen af listen
-  addFirst(data) {}
+  addFirst(data) {
+    const node = new Node(data);
+    this.addNodeFirst(node);
+  }
 
   // - `get( index )` - returnerer elementet på plads nummer *index*
   get(index) {}
@@ -42,10 +53,26 @@ export default class DoublyLinkedList {
   // ******************** metoder til nodes ***********************
 
   // - `addNodeLast( newNode )` - tilføjer en ny node til slutningen af listen
-  addNodeLast(newNode) {}
+  addNodeLast(newNode) {
+    const prevTail = this.tail;
+    this.tail = newNode;
+
+    if (prevTail) {
+      this.tail.prev = prevTail;
+      prevTail.next = this.tail;
+    }
+  }
 
   // - `addNodeFirst( newNode )` - tilføjer en ny node i starten af listen
-  addNodeFirst(newNode) {}
+  addNodeFirst(newNode) {
+    const prevHead = this.head;
+    this.head = newNode;
+
+    if (prevHead) {
+      this.head.next = prevHead;
+      prevHead.prev = this.head;
+    }
+  }
 
   // - `insertAfterNode( newNode, existingNode )` - indsætter en ny node efter en eksisterende
   insertAfterNode(newNode, existingNode) {}
@@ -70,10 +97,27 @@ export default class DoublyLinkedList {
   size() {}
 
   // - `dumpList( )` - udskriver hele listen i console
-  dumpList() {}
+  dumpList() {
+    console.log(`
+                Linked list
+            ====================
+            head: ${this.head.data}
+            tail: ${this.tail.data}
+            `);
+    let current = this.head;
+    while (current) {
+      console.log(`
+                Node: ${current.data}
+                ---------------------
+                prev: ${current.previous?.data}
+                next: ${current.next?.data}
+                `);
+      current = current.next;
+    }
+  }
 }
 
-class Node {
+export class Node {
   data;
   next;
   prev;
