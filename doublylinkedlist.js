@@ -45,7 +45,7 @@ export default class DoublyLinkedList {
   removeIndex(index) {}
 
   // - `removeFirst()` - fjerner det første element i listen - og returnerer elementet
-  removeFirdt() {}
+  removeFirst() {}
 
   // - `removeLast()` - fjerner det sidste element i listen - og returnerer elementet
   removeLast() {}
