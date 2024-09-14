@@ -1,3 +1,5 @@
+// assignment: https://petlatkea.notion.site/datastruktur-Doubly-Linked-List-e00f99121e8c4130bb10e87ab2091c8c
+
 export default class DoublyLinkedList {
   head = null;
   tail = null;
