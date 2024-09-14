@@ -47,10 +47,30 @@ export default class DoublyLinkedList {
   removeIndex(index) {}
 
   // - `removeFirst()` - fjerner det første element i listen - og returnerer elementet
-  removeFirst() {}
+  removeFirst() {
+    const oldHead = this.head;
+
+    if (oldHead?.next) {
+      this.head = oldHead.next;
+      this.head.prev = null;
+    } else {
+      this.clear();
+    }
+    return oldHead;
+  }
 
   // - `removeLast()` - fjerner det sidste element i listen - og returnerer elementet
-  removeLast() {}
+  removeLast() {
+    const oldTail = this.tail;
+
+    if (oldTail?.prev) {
+      this.tail = oldTail.prev;
+      this.tail.next = null;
+    } else {
+      this.clear();
+    }
+    return oldTail;
+  }
 
   // ******************** metoder til nodes ***********************
 
@@ -78,13 +98,44 @@ export default class DoublyLinkedList {
   }
 
   // - `insertAfterNode( newNode, existingNode )` - indsætter en ny node efter en eksisterende
-  insertAfterNode(newNode, existingNode) {}
+  insertAfterNode(newNode, existingNode) {
+    if (existingNode === this.tail) {
+      this.addNodeLast(newNode);
+    } else {
+      const oldNext = existingNode.next;
+      newNode.prev = existingNode;
+      newNode.next = oldNext;
+      oldNext.prev = newNode;
+      existingNode.next = newNode;
+    }
+  }
 
   // - `insertBeforeNode( newNode, existingNode )` - indsætter en ny node før en eksisterende
-  insertBeforeNode(newNode, existingNode) {}
+  insertBeforeNode(newNode, existingNode) {
+    if (existingNode === this.head) {
+      this.addNodeFirst(newNode);
+    } else {
+      const oldPrev = existingNode.prev;
+      newNode.prev = oldPrev;
+      newNode.next = existingNode;
+      oldPrev.next = newNode;
+      existingNode.prev = newNode;
+    }
+  }
 
   // - `removeNode( existingNode )` - fjerner en eksisterende node fra listen
-  removeNode(existingNode) {}
+  removeNode(existingNode) {
+    if (existingNode === this.head) {
+      this.removeFirst();
+    } else if (existingNode === this.tail) {
+      this.removeLast();
+    } else {
+      const oldPrev = existingNode.prev;
+      const oldNext = existingNode.next;
+      oldNext.prev = existingNode.prev;
+      oldPrev.next = existingNode.next;
+    }
+  }
 
   // - `nodeAt( index )` - returnerer noden på plads nummer *index*
   nodeAt(index) {}
@@ -94,10 +145,21 @@ export default class DoublyLinkedList {
 
   // ******************** metoder til hele listen ***********************
   // - `clear()` - fjerner alle elementer fra listen
-  clear() {}
+  clear() {
+    this.head = null;
+    this.tail = null;
+  }
 
   // - `size()` - returnerer antallet af nodes i listen
-  size() {}
+  size() {
+    let count = 0;
+    let current = this.head;
+    while (current) {
+      count++;
+      current = current.next;
+    }
+    return count;
+  }
 
   // - `dumpList( )` - udskriver hele listen i console
   dumpList() {
